@@ -4,9 +4,11 @@ TOOLSET := target
 TARGET := libequi
 DEFS_Debug := \
 	'-DNODE_GYP_MODULE_NAME=libequi' \
+	'-DUSING_UV_SHARED=1' \
+	'-DUSING_V8_SHARED=1' \
+	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
-	'-D_GNU_SOURCE' \
 	'-DDEBUG' \
 	'-D_DEBUG'
 
@@ -26,26 +28,28 @@ CFLAGS_C_Debug := \
 	-std=c11 \
 	-Wl,--whole-archive \
 	-fPIC \
-	-Wno-pointer-sign
+	-Wno-pointer-sign \
+	-D_GNU_SOURCE
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
-	-fno-delete-null-pointer-checks \
+	-fno-rtti \
 	-fno-exceptions \
-	-fno-rtti
+	-std=gnu++0x
 
 INCS_Debug := \
-	-I/home/user/.node-gyp/0.12.17/include/node \
-	-I/home/user/.node-gyp/0.12.17/src \
-	-I/home/user/.node-gyp/0.12.17/deps/uv/include \
-	-I/home/user/.node-gyp/0.12.17/deps/v8/include \
-	-I/home/user/code/equihash-verifysrc/equi
+	-I/home/ross/.node-gyp/4.2.6/include/node \
+	-I/home/ross/.node-gyp/4.2.6/src \
+	-I/home/ross/.node-gyp/4.2.6/deps/uv/include \
+	-I/home/ross/.node-gyp/4.2.6/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=libequi' \
+	'-DUSING_UV_SHARED=1' \
+	'-DUSING_V8_SHARED=1' \
+	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_LARGEFILE_SOURCE' \
-	'-D_FILE_OFFSET_BITS=64' \
-	'-D_GNU_SOURCE'
+	'-D_FILE_OFFSET_BITS=64'
 
 # Flags passed to all source files.
 CFLAGS_Release := \
@@ -58,8 +62,6 @@ CFLAGS_Release := \
 	-O3 \
 	-ffunction-sections \
 	-fdata-sections \
-	-fno-tree-vrp \
-	-fno-tree-sink \
 	-fno-omit-frame-pointer
 
 # Flags passed to only C files.
@@ -67,20 +69,20 @@ CFLAGS_C_Release := \
 	-std=c11 \
 	-Wl,--whole-archive \
 	-fPIC \
-	-Wno-pointer-sign
+	-Wno-pointer-sign \
+	-D_GNU_SOURCE
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
-	-fno-delete-null-pointer-checks \
+	-fno-rtti \
 	-fno-exceptions \
-	-fno-rtti
+	-std=gnu++0x
 
 INCS_Release := \
-	-I/home/user/.node-gyp/0.12.17/include/node \
-	-I/home/user/.node-gyp/0.12.17/src \
-	-I/home/user/.node-gyp/0.12.17/deps/uv/include \
-	-I/home/user/.node-gyp/0.12.17/deps/v8/include \
-	-I/home/user/code/equihash-verifysrc/equi
+	-I/home/ross/.node-gyp/4.2.6/include/node \
+	-I/home/ross/.node-gyp/4.2.6/src \
+	-I/home/ross/.node-gyp/4.2.6/deps/uv/include \
+	-I/home/ross/.node-gyp/4.2.6/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/equi/equi.o \

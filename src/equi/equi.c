@@ -7,7 +7,7 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.
  *
  * Port to C of C++ implementation of the Equihash Proof-of-Work
- * algorithm from zcashd.
+ * algorithm from AION.
  */
 
 #include <string.h>
@@ -23,7 +23,7 @@ static void digestInit(crypto_generichash_blake2b_state *S, const int n, const i
   uint32_t le_N = htole32(n);
   uint32_t le_K = htole32(k);
   unsigned char personalization[crypto_generichash_blake2b_PERSONALBYTES] = {};
-  memcpy(personalization, "ZcashPoW", 9);
+  memcpy(personalization, "AION0PoW", 9);
   memcpy(personalization + 8,  &le_N, 4);
   memcpy(personalization + 12, &le_K, 4);
   crypto_generichash_blake2b_init_salt_personal(S,
@@ -90,8 +90,8 @@ static void generateHash(crypto_generichash_blake2b_state *S, const uint32_t g, 
   crypto_generichash_blake2b_final(&digest, hash, hashLen);
 }
 
-// hdr -> header including nonce (140 bytes)
-// soln -> equihash solution (excluding 3 bytes with size, so 1344 bytes length)
+// hdr -> header including nonce (508 bytes) Split must be 476 (header) | 32 (nonce)
+// soln -> equihash solution (1344 bytes length)
 bool verifyEH(const char *hdr, const char *soln) {
   const int n = 200;
   const int k = 9;
@@ -106,7 +106,7 @@ bool verifyEH(const char *hdr, const char *soln) {
 
   crypto_generichash_blake2b_state state;
   digestInit(&state, n, k);
-  crypto_generichash_blake2b_update(&state, hdr, 140);
+  crypto_generichash_blake2b_update(&state, hdr, 508);
 
   expandArray(soln, equihashSolutionSize, (char *)&indices, sizeof(indices), collisionBitLength + 1, 1);
 

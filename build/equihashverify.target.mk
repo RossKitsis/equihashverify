@@ -4,6 +4,9 @@ TOOLSET := target
 TARGET := equihashverify
 DEFS_Debug := \
 	'-DNODE_GYP_MODULE_NAME=equihashverify' \
+	'-DUSING_UV_SHARED=1' \
+	'-DUSING_V8_SHARED=1' \
+	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
@@ -26,22 +29,25 @@ CFLAGS_C_Debug :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
-	-fno-delete-null-pointer-checks \
-	-fno-exceptions \
 	-fno-rtti \
+	-fno-exceptions \
+	-std=gnu++0x \
 	-std=c++11 \
 	-Wl,--whole-archive \
 	-fPIC
 
 INCS_Debug := \
-	-I/home/user/.node-gyp/0.12.17/include/node \
-	-I/home/user/.node-gyp/0.12.17/src \
-	-I/home/user/.node-gyp/0.12.17/deps/uv/include \
-	-I/home/user/.node-gyp/0.12.17/deps/v8/include \
+	-I/home/ross/.node-gyp/4.2.6/include/node \
+	-I/home/ross/.node-gyp/4.2.6/src \
+	-I/home/ross/.node-gyp/4.2.6/deps/uv/include \
+	-I/home/ross/.node-gyp/4.2.6/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=equihashverify' \
+	'-DUSING_UV_SHARED=1' \
+	'-DUSING_V8_SHARED=1' \
+	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION'
@@ -57,8 +63,6 @@ CFLAGS_Release := \
 	-O3 \
 	-ffunction-sections \
 	-fdata-sections \
-	-fno-tree-vrp \
-	-fno-tree-sink \
 	-fno-omit-frame-pointer
 
 # Flags passed to only C files.
@@ -66,18 +70,18 @@ CFLAGS_C_Release :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
-	-fno-delete-null-pointer-checks \
-	-fno-exceptions \
 	-fno-rtti \
+	-fno-exceptions \
+	-std=gnu++0x \
 	-std=c++11 \
 	-Wl,--whole-archive \
 	-fPIC
 
 INCS_Release := \
-	-I/home/user/.node-gyp/0.12.17/include/node \
-	-I/home/user/.node-gyp/0.12.17/src \
-	-I/home/user/.node-gyp/0.12.17/deps/uv/include \
-	-I/home/user/.node-gyp/0.12.17/deps/v8/include \
+	-I/home/ross/.node-gyp/4.2.6/include/node \
+	-I/home/ross/.node-gyp/4.2.6/src \
+	-I/home/ross/.node-gyp/4.2.6/deps/uv/include \
+	-I/home/ross/.node-gyp/4.2.6/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 OBJS := \
