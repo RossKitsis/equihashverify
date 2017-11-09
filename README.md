@@ -1,7 +1,7 @@
 # equihashverify
 nodejs native binding to check for valid Equihash solutions
 
-##usage:
+## usage:
 ````javascript
 var ev = require('bindings')('equihashverify.node');
 
@@ -12,5 +12,5 @@ ev.verify(header, solution);
 //returns boolean
 ````
 
-##help
-https://zclassic.herokuapp.com
+The header format must be 508 bytes long split between 476 bytes containing all header fields except the nonce + 32 byte nonce.
+The solution format must be in the compressed format; 1344 bytes for parameters 2xx,9.
